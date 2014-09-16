@@ -20,7 +20,6 @@ class ContactsController < ApplicationController
 
     if @contact.save
       redirect_to @contact, notice: 'Contact was successfully created.'
-      render :show, status: :created, location: @contact
     else
       render :new
     end
@@ -49,9 +48,7 @@ class ContactsController < ApplicationController
     end
 
     def contact_params
-      params[:contact][:email].reverse!
-      params[:contact][:name].reverse!
-      params[:contact][:notes].reverse!
+
       params.require(:contact).permit(:name, :email, :notes)
     end
 end
